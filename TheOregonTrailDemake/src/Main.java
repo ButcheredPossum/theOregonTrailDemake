@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         mainMenuOptions();
@@ -21,7 +22,7 @@ public class Main {
         int choice = scanner.nextInt();
         switch(choice){
             case 1:
-                System.out.printf("1");
+                startGame();
                 break;
             case 2:
                 howToPlay();
@@ -49,6 +50,9 @@ public class Main {
     }
     static void startGame(){
         Scanner scanner = new Scanner(System.in);
+        int choice;
+        String goBack;
+        boolean flag = true;
         System.out.printf("""
                 
                 ------------
@@ -56,7 +60,9 @@ public class Main {
                 Independence, Missouri. You must decide which 
                 monthv to leave Independence. 
                 """);
-        System.out.printf("""
+        while(flag){
+            System.out.printf("""
+                ------------
                 1. March
                 2. April
                 3. May
@@ -64,22 +70,46 @@ public class Main {
                 4. July
                 6. Ask for advice
                 """);
-        System.out.printf("What is your choice? ");
-        int choice = scanner.nextInt();
-        switch(choice){
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            default:
+            System.out.printf("What is your choice? ");
+            choice = scanner.nextInt();
+            switch(choice){
+                case 1:
+                    flag = false;
+                    break;
+                case 2:
+                    flag = false;
+                    break;
+                case 3:
+                    flag = false;
+                    break;
+                case 4:
+                    flag = false;
+                    break;
+                case 5:
+                    flag = false;
+                    break;
+                case 6:
+                    System.out.println("""
+                            ------------
+                            You attend a public meeting held for
+                            'folks with california Oregon fever.'
+                            You're told:
+                            
+                            If you leave too early, there won't be
+                            any grass for your oxen to eat. If you
+                            leave too late, you might not get to Oregon 
+                            before winter comes. If you leave at just the 
+                            right time, there will be green grass and the 
+                            weather will still be cool. 
+                            """);
+                    System.out.printf("Type anything to go back: ");
+                    goBack = scanner.next();
+                    break;
+                default:
+                    flag = false;
+            }
         }
+
     }
 }
+
