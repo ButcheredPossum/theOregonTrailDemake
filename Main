@@ -377,3 +377,82 @@ class Enemy{
 		this.hp = hp;
 	}
 }
+
+
+//Kod Michała____________________________________________________________________________________________________________________________________________________________
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Czy chcesz zagrać w pokera teksańskiego? Y/N");
+        String odpowiedz = scanner.nextLine();
+
+
+        if(odpowiedz.equals("Y") || odpowiedz.equals("y")) {
+            System.out.println("podaj budzet na szczytny cel");
+            float budzet = 0;
+
+            while (!scanner.hasNextFloat() || (budzet = scanner.nextFloat()) <= 0) {
+                System.out.println("budżet musi być LICZBĄ WIEKSZA od 0:");
+                scanner.nextLine();
+            }
+
+            TaliaKart talia = new TaliaKart();
+            talia.tasowanie();
+
+            System.out.println("twoje karty: ");
+            for (int i = 0; i < 5; i++) {
+                Karta karta = talia.dajKarte();
+                System.out.println(karta.jakaKarta());
+            }
+
+
+        }else{
+            System.out.println("dziękujemy za grę");
+        }
+    }
+}
+
+class Karta {
+    private String kolor;
+    private String wartosc;
+
+    public Karta(String kolor, String wartosc){
+        this.kolor = kolor;
+        this.wartosc = wartosc;
+    }
+
+    public String jakaKarta() {
+        return wartosc + " " + kolor;
+    }
+}
+
+class TaliaKart {
+    private List<Karta> karty;
+
+    public TaliaKart(){
+        karty = new ArrayList<>();
+        String[] kolory = {"pik", "kier", "trefl", "karo"};
+        String[] wartosci = {"2", "3", "4","5","6","7","8","9","10","J", "Q","K","A" };
+
+        for (String kolor : kolory) {
+            for (String wartosc : wartosci) {
+                karty.add(new Karta(wartosc, kolor));
+            }
+        }
+    }
+
+    public void tasowanie() {
+        Collections.shuffle(karty);
+    }
+
+    public Karta dajKarte() {
+        return karty.remove(0);
+    }
+}
